@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+
+<h3>Sort Names Alphabetically</h3>
+
+<ul>
+  <li ng-repeat="name in names | orderBy">
+    {{name}}
+  </li>
+</ul>
+
+<script>
+var app = angular.module("myApp", []);
+
+app.controller("myCtrl", function($scope) {
+  $scope.names = ["Rahul", "Amit", "Neha", "Sonal"];
+});
+</script>
+
+</body>
+</html>
