@@ -1,15 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="shopApp">
+<head>
+<meta charset="UTF-8">
+<title>BigBasket Style Cards - Single File</title>
+
+<!-- AngularJS -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<body>
 
-<div ng-app="" ng-init="firstName='chandrakant'">
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<p>Input something in the input box:</p>
-<p>Name: <input type="text" ng-model="firstName"></p>
-<p>You wrote: {{ firstName }}</p>
+<style>
+.card img {
+  height: 160px;
+  object-fit: cover;
+}
+.price {
+  color: #2e7d32;
+  font-weight: bold;
+}
+</style>
+</head>
 
+<body ng-controller="shopCtrl">
+
+<div class="container mt-4">
+  <h3 class="mb-4">🛒 Grocery Store</h3>
+
+  <div class="row">
+    <div class="col-md-3 col-sm-6 mb-4" ng-repeat="p in products">
+
+      <div class="card h-100 shadow-sm">
+        <img ng-src="{{p.image}}" class="card-img-top" alt="{{p.name}}">
+
+        <div class="card-body">
+          <h6 class="card-title">{{p.name}}</h6>
+          <p class="price">₹ {{p.price}}</p>
+          <p class="text-muted small">{{p.quantity}}</p>
+        </div>
+
+        <div class="card-footer bg-white border-0">
+          <button class="btn btn-success w-100">
+            Add to Basket
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
+
+<script>
+var app = angular.module("shopApp", []);
+
+app.controller("shopCtrl", function($scope) {
+
+  // JSON objects (inside same file)
+  $scope.products = [
+    {
+      name: "Onion",
+      price: 30,
+      quantity: "1 kg",
+      image: "../img/onion.png"
+    },
+    {
+      name: "Tomato",
+      price: 25,
+      quantity: "1 kg",
+      image: "./img/tomato.png"
+    },
+    {
+      name: "Apple",
+      price: 120,
+      quantity: "1 kg",
+      image: "./img/apple.png"
+    },
+    {
+      name: "Milk",
+      price: 55,
+      quantity: "1 litre",
+      image: "./img/milk.png"
+    },
+    {
+      name: "Rice",
+      price: 65,
+      quantity: "1 kg",
+      image: "./img/rice.png"
+    },
+    {
+      name: "Sugar",
+      price: 45,
+      quantity: "1 kg",
+      image: "./img/sugar.png"
+    }
+  ];
+
+});
+</script>
 
 </body>
 </html>
