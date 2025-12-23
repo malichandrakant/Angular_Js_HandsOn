@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <style>
+    .error { color: red; font-size: 14px; }
+    .info { color: blue; font-size: 14px; }
+    input { display: block; margin-bottom: 10px; }
+  </style>
+</head>
+<body ng-controller="myCtrl">
+
+<h2>AngularJS Input Validation Demo</h2>
+
+<form name="userForm" novalidate>
+
+  <!-- Name: Required, minlength, maxlength -->
+  <label>Name (Required, 3-10 chars):</label>
+  <input type="text" name="username" ng-model="user.name" 
+         ng-required="true" ng-minlength="3" ng-maxlength="10">
+  <span class="error" ng-show="userForm.username.$touched && userForm.username.$error.required">
+    Name is required!
+  </span>
+  <span class="error" ng-show="userForm.username.$touched && userForm.username.$error.minlength">
+    Name must be at least 3 characters!
+  </span>
+  <span class="error" ng-show="userForm.username.$touched && userForm.username.$error.maxlength">
+    Name cannot exceed 10 characters!
+  </span>
+  <span class="info">Status: $touched={{userForm.username.$touched}}, $dirty={{userForm.username.$dirty}}, $valid={{userForm.username.$valid}}, $pristine={{userForm.username.$pristine}}</span>
+  <br>
+
+  <!-- Email: Required, email pattern -->
+  <label>Email (Required, valid email):</label>
+  <input type="email" name="email" ng-model="user.email" ng-required="true">
+  <span class="error" ng-show="userForm.email.$touched && userForm.email.$error.required">
+    Email is required!
+  </span>
+  <span class="error" ng-show="userForm.email.$touched && userForm.email.$error.email">
+    Invalid email!
+  </span>
+  <span class="info">Status: $touched={{userForm.email.$touched}}, $dirty={{userForm.email.$dirty}}, $valid={{userForm.email.$valid}}, $pristine={{userForm.email.$pristine}}</span>
+  <br>
+
+  <!-- Age: Required, number, min, max -->
+  <label>Age (Required, 18-60):</label>
+  <input type="number" name="age" ng-model="user.age" ng-required="true" min="18" max="60">
+  <span class="error" ng-show="userForm.age.$touched && userForm.age.$error.required">
+    Age is required!
+  </span>
+  <span class="error" ng-show="userForm.age.$touched && userForm.age.$error.min">
+    Minimum age is 18!
+  </span>
+  <span class="error" ng-show="userForm.age.$touched && userForm.age.$error.max">
+    Maximum age is 60!
+  </span>
+  <span class="info">Status: $touched={{userForm.age.$touched}}, $dirty={{userForm.age.$dirty}}, $valid={{userForm.age.$valid}}, $pristine={{userForm.age.$pristine}}</span>
+  <br>
+
+  <!-- Password: Required, pattern -->
+  <label>Password (Required, at least 1 number & 1 letter):</label>
+  <input type="password" name="password" ng-model="user.password" 
+         ng-required="true" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/">
+  <span class="error" ng-show="userForm.password.$touched && userForm.password.$error.required">
+    Password is required!
+  </span>
+  <span class="error" ng-show="userForm.password.$touched && userForm.password.$error.pattern">
+    Password must contain at least 6 characters, 1 letter & 1 number!
+  </span>
+  <span class="info">Status: $touched={{userForm.password.$touched}}, $dirty={{userForm.password.$dirty}}, $valid={{userForm.password.$valid}}, $pristine={{userForm.password.$pristine}}</span>
+  <br>
+
+  <!-- Submit Button -->
+  <button type="submit" ng-disabled="userForm.$invalid">Submit</button>
+
+  <h3>Form Properties:</h3>
+  <p>$valid = {{userForm.$valid}}</p>
+  <p>$invalid = {{userForm.$invalid}}</p>
+  <p>$pristine = {{userForm.$pristine}}</p>
+  <p>$dirty = {{userForm.$dirty}}</p>
+
+</form>
+
+<script>
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope) {
+    $scope.user = {};
+});
+</script>
+
+</body>
+</html>
