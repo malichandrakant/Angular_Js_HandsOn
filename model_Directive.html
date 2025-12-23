@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+
+<form name="userForm" novalidate>
+
+  <!-- Name Field: Required -->
+  Name:
+  <input type="text" name="username" ng-model="user.name" ng-required="true">
+  <span style="color:red" ng-show="userForm.username.$touched && userForm.username.$error.required">
+    Name is required!
+  </span>
+  <br><br>
+
+  <!-- Email Field: Required and Must be valid email -->
+  Email:
+  <input type="email" name="useremail" ng-model="user.email" ng-required="true">
+  <span style="color:red" ng-show="userForm.useremail.$touched && userForm.useremail.$error.required">
+    Email is required!
+  </span>
+  <span style="color:red" ng-show="userForm.useremail.$touched && userForm.useremail.$error.email">
+    Invalid email!
+  </span>
+  <br><br>
+
+  <!-- Password Field: Required, min 6 characters -->
+  Password:
+  <input type="password" name="password" ng-model="user.password" ng-required="true" ng-minlength="6">
+  <span style="color:red" ng-show="userForm.password.$touched && userForm.password.$error.required">
+    Password is required!
+  </span>
+  <span style="color:red" ng-show="userForm.password.$touched && userForm.password.$error.minlength">
+    Password must be at least 6 characters!
+  </span>
+  <br><br>
+
+  <!-- Submit Button -->
+  <button type="submit" ng-disabled="userForm.$invalid">Submit</button>
+
+</form>
+
+<script>
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope) {
+    $scope.user = {};
+});
+</script>
+
+</body>
+</html>
